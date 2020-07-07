@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Canada</string>
+    <string name="facts">Facts</string>
+    <string name="facts_img">Facts Image</string>
+    <string name="canada">Canada</string>
+    <string name="empty_string"> </string>
+    <string name="retry">Retry</string>
 </resources>
