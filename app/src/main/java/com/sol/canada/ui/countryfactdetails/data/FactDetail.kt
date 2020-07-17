@@ -5,6 +5,10 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
 
+/**
+ * An entity class
+ * Fact data model holds for Fact table
+ */
 @Entity(tableName = "fact")
 @Parcelize
 data class FactDetail(

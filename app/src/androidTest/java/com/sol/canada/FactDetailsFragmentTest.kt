@@ -25,7 +25,11 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.annotation.LooperMode
 
-
+/**
+ * Class responsible for UI testing
+ * Used MockWebserver to fake API response
+ *
+ */
 @RunWith(AndroidJUnit4::class)
 @LooperMode(LooperMode.Mode.PAUSED)
 class FactDetailsFragmentTest {
@@ -51,6 +55,9 @@ class FactDetailsFragmentTest {
         recyclerViewMatcher = RecyclerViewMatcher(R.id.facts_recyclerview)
     }
 
+    /**
+     * Method to success flow which loads data from assets and verify the recycler item tittle matches
+     */
     @Test
     fun successfullyLoadedData() {
         //Returning success data using Mockwebserver
@@ -67,6 +74,9 @@ class FactDetailsFragmentTest {
             .check(ViewAssertions.matches(withText("Flag")))
     }
 
+    /**
+     * Method to test failed state , Returns 404 and verify recylerview count 0
+     */
     @Test
     fun failedToLoadData() {
         //Returning 404 error using Mockwebserver

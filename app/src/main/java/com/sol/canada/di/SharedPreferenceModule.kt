@@ -7,6 +7,10 @@ import com.sol.canada.util.AppConstant
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
+
+/**
+ * Provides SharedPreference dependency
+ */
 @SuppressLint("JvmStaticProvidesInObjectDetector")
 @Module
 object SharedPreferenceModule {

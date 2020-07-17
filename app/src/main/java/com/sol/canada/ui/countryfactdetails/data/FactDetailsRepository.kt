@@ -8,6 +8,12 @@ import javax.inject.Singleton
 
 const val TITTLE = "tittle"
 
+/**
+ * Repository class which handles data from local and remote data source
+ * @param localDataSource loacal data source class for database related operation
+ * @param remoteDataSource class which handles remote api response
+ * @param appSharedPreference Helper class to store data in SharePreference
+ */
 @Singleton
 class FactDetailsRepository @Inject constructor(
     private val localDataSource: FactsLocalDataSource,
@@ -20,16 +26,23 @@ class FactDetailsRepository @Inject constructor(
             databaseQuery = { localDataSource.getFacts() },
             networkCall = { remoteDataSource.fetchFacts() },
             saveCallResult = {
-                updateData(it.rows)
+                insertData(it.rows)
                 appSharedPreference.putStringData(TITTLE, it.title)
             })
 
+    /**
+     * Clears fact data from local database
+     */
     override suspend fun clearFactsData() {
         localDataSource.clearData()
     }
 
-    override suspend fun updateData(facts: List<FactDetail>) {
-       localDataSource.updateData(facts)
+    /**
+     * Inserts fact data to local database
+     * @param facts List contains FactDetail
+     */
+    override suspend fun insertData(facts: List<FactDetail>) {
+       localDataSource.insertData(facts)
     }
 
 }

@@ -3,6 +3,9 @@ package com.sol.canada.ui.countryfactdetails.data
 import androidx.lifecycle.LiveData
 import androidx.room.*
 
+/**
+ * Dao for facts table
+ */
 @Dao
 interface FactDao {
 

@@ -13,6 +13,10 @@ import dagger.Binds
 import dagger.Module
 import dagger.Provides
 import javax.inject.Singleton
+
+/**
+ * Module which provide dependency for FactRemoteDataSource, FactsLocalDataSource and FactDetailsRepository
+ */
 @SuppressLint("JvmStaticProvidesInObjectDetector")
 @Module(includes = [ApplicationModuleBinds::class])
 object AppModule {

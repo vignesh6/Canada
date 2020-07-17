@@ -15,6 +15,10 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+
+/***
+ * Module provides dependency for all network related operations
+ */
 @SuppressLint("JvmStaticProvidesInObjectDetector")
 @Module
 object NetworkModule {

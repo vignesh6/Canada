@@ -5,6 +5,9 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
 
+/**
+ * Utility class facts.json from assets
+ */
 object AssetReaderUtil {
     fun asset(context: Context, assetPath: String): String {
         try {

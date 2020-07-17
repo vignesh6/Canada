@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.sol.canada.R
 import com.sol.canada.data.AppSharedPreference
 import com.sol.canada.data.Result
 import com.sol.canada.databinding.FragmentFactsBinding
@@ -22,8 +23,9 @@ import kotlinx.coroutines.launch
 import org.jetbrains.annotations.NotNull
 import timber.log.Timber
 import javax.inject.Inject
-
-const val NETWORK_ERROR = "Check Network Connection and Try Again!"
+/**
+ * Fragment responsible for handling UI for country facts
+ */
 class FactDetailsFragment : DaggerFragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -33,6 +35,10 @@ class FactDetailsFragment : DaggerFragment() {
     lateinit var appSharedPreference: AppSharedPreference
     private lateinit var factViewModel: FactDetailsViewModel
     private lateinit var layoutManager: LinearLayoutManager
+
+    /**
+     * Initialize FactDetailsViewModel and FragmentFactsBinding
+     */
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -51,6 +57,9 @@ class FactDetailsFragment : DaggerFragment() {
         return binding.root
     }
 
+    /**
+     * Sets the LayoutManger for Recyclerview
+     */
     private fun setLayoutManager(binding: @NotNull FragmentFactsBinding) {
         val recyclerView = binding.factsRecyclerview
         var scrollPosition = 0
@@ -63,11 +72,17 @@ class FactDetailsFragment : DaggerFragment() {
         recyclerView.scrollToPosition(scrollPosition)
     }
 
+    /**
+     * Add SwipeRefresh listener and add Observers for Error and Network Connectivity
+     * @param binding the binding to access UI
+     * @param adapter the adapter passed to ObserveFacts method
+     */
     private fun subscribeUi(
         binding: FragmentFactsBinding,
         adapter: FactsDetailAdapter
     ) {
         observeFacts(binding, adapter)
+        //SwipeToRefresh listener which clears data and empty the recycler view
         binding.refreshFacts.setOnRefreshListener {
             factViewModel.clearData()
             adapter.submitList(null)
@@ -85,6 +100,11 @@ class FactDetailsFragment : DaggerFragment() {
         }
     }
 
+    /**
+     * Observes the facts from FactDetailsViewModel and update UI based on the Result received
+     * @param binding the binding to access UI
+     * @param adapter the adapter to update the list observed
+     */
     private fun observeFacts(
         binding: FragmentFactsBinding,
         adapter: FactsDetailAdapter
@@ -115,7 +135,7 @@ class FactDetailsFragment : DaggerFragment() {
                         binding.retryButton.visibility = View.VISIBLE
                         val errorMessage =
                             if (!isConnected)
-                                NETWORK_ERROR
+                                getString(R.string.no_internet)
                             else
                                 result.message!!
                         Snackbar.make(binding.root, errorMessage, Snackbar.LENGTH_LONG).show()
@@ -125,6 +145,9 @@ class FactDetailsFragment : DaggerFragment() {
         })
     }
 
+    /**
+     * Save the connectivity status locally
+     */
     private fun handleConnectivityChange() {
         isConnected = ConnectivityStateHolder.isConnected
     }

@@ -8,6 +8,9 @@ import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 import timber.log.Timber
 
+/**
+ * Application class which injects dependency and third party library such as Stetho and Timber
+ */
 open class CountryFactApp:DaggerApplication(){
 
     override fun onCreate() {

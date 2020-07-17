@@ -8,8 +8,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.sol.canada.databinding.ItemFactDetailBinding
 import com.sol.canada.ui.countryfactdetails.data.FactDetail
 
+/**
+ * Adapter responsible for updating the recyclerview with facts
+ */
 class FactsDetailAdapter :
     ListAdapter<FactDetail, FactDetailViewHolder>(FactDetailDiffCallback()) {
+
+    /**
+     * Creates ViewHolder associated with the FactsDetailAdapter and return it.
+     */
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FactDetailViewHolder {
         return FactDetailViewHolder(
             ItemFactDetailBinding.inflate(
@@ -18,6 +25,9 @@ class FactsDetailAdapter :
         )
     }
 
+    /**
+     * Bind fact item to the FactsViewHolder
+     */
     override fun onBindViewHolder(holder: FactDetailViewHolder, position: Int) {
         val factDetail = getItem(position)
         holder.apply {
@@ -28,6 +38,9 @@ class FactsDetailAdapter :
 
 }
 
+/**
+ * Calculates the difference between two lists
+ */
 private class FactDetailDiffCallback : DiffUtil.ItemCallback<FactDetail>() {
 
     override fun areItemsTheSame(
@@ -41,6 +54,10 @@ private class FactDetailDiffCallback : DiffUtil.ItemCallback<FactDetail>() {
     }
 }
 
+/**
+ * ViewHolder that is bind to FactsDetailAdapter
+ * Updates individual item UI
+ */
 class FactDetailViewHolder(private val binding: ItemFactDetailBinding) :
     RecyclerView.ViewHolder(binding.root) {
     fun bind(item: FactDetail) {

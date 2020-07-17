@@ -8,6 +8,9 @@ import dagger.android.AndroidInjectionModule
 import dagger.android.AndroidInjector
 import javax.inject.Singleton
 
+/**
+ * Modules that are injected in to application are provided
+ */
 @Singleton
 @Component(modules = [AndroidInjectionModule::class,ViewModelModule::class,ActivityBuildersModule::class,AppModule::class,SharedPreferenceModule::class,NetworkModule::class])
 interface ApplicationComponent : AndroidInjector<CountryFactApp> {

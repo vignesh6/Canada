@@ -7,6 +7,9 @@ import okhttp3.mockwebserver.Dispatcher
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.RecordedRequest
 
+/**
+ * Returns facts data when invoked from MockWebServer
+ */
 class SuccessDispatcher(
     private val context: Context = InstrumentationRegistry.getInstrumentation().targetContext
 ) : Dispatcher() {

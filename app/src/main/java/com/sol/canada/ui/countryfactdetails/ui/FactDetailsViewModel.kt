@@ -6,7 +6,12 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-//Shared view model for both activity and fragment
+/**
+ * ViewModel which is responsible for getting facts details from repository
+ *
+ * @param repository Repository that return fact details and updated data on refresh
+ */
+
 class FactDetailsViewModel @Inject constructor(
     private val repository: FactRepository
 ) : ViewModel() {
@@ -31,12 +36,20 @@ class FactDetailsViewModel @Inject constructor(
         repository.getFacts()
     }
 
+    /**
+     * This method gets called from FactDetailFragment whenever swipe
+     * to refresh is invoked to refresh facts data
+     */
     fun refreshItem() {
         _refreshItems.value = true
     }
 
     //check for db value if count 0  fetch from network and store it in db ( return from db )
     fun getErrorMessage(): LiveData<String> = errorMessage
+
+    /**
+     * Clear the facts data when SwipeToRefresh is invoked
+     */
     fun clearData() {
         val coroutineExceptionHandler = CoroutineExceptionHandler { _, exception ->
             onError(exception)
@@ -46,6 +59,9 @@ class FactDetailsViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Handle error message and update the UI observer
+     */
     private fun onError(exception: Throwable) {
         exception.message?.let {
             errorMessage.postValue(exception.message)

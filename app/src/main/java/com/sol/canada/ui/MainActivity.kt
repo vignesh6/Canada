@@ -20,13 +20,19 @@ import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
 import javax.inject.Inject
 
+/**
+ * Activity which gets invoked on launch of the application
+ */
 class MainActivity : DaggerAppCompatActivity() {
-
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var viewModel:FactDetailsViewModel
+
+    /**
+     * Initialize FactDetailsViewModel, ActivityMainBinding and updates app tittle
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding: ActivityMainBinding = DataBindingUtil.setContentView(this,
