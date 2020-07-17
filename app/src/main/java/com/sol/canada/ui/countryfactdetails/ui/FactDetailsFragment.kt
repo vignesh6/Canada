@@ -122,7 +122,6 @@ class FactDetailsFragment : DaggerFragment() {
                     }
                 }
             }
-
         })
     }
 

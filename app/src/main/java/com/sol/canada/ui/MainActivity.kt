@@ -39,7 +39,7 @@ class MainActivity : DaggerAppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         //Observing tittle from view model set by FactDetailsFragment
         viewModel.getTittle().observe(this, Observer {
-           // Timber.e(it)
+            if(it.toString().isNotEmpty())
             supportActionBar!!.title = it
         })
     }
