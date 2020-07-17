@@ -60,7 +60,7 @@ object TestNetworkModule {
         converterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(ApiInterface.API_TEST_END_POINT_URL)
+            .baseUrl(BuildConfig.LOCAL_URL)
             .client(okhttpClient)
             .addConverterFactory(converterFactory)
             .build()

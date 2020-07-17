@@ -74,7 +74,7 @@ object NetworkModule {
         converterFactory: GsonConverterFactory
     ): Retrofit {
         return Retrofit.Builder()
-            .baseUrl(ApiInterface.API_END_POINT_URL)
+            .baseUrl(BuildConfig.API_END_POINT_URL)
             .client(okhttpClient)
             .addConverterFactory(converterFactory)
             .build()

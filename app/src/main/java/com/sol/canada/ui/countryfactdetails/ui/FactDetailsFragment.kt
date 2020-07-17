@@ -68,7 +68,7 @@ class FactDetailsFragment : DaggerFragment() {
         adapter: FactsDetailAdapter
     ) {
         observeFacts(binding, adapter)
-        binding.refreshFacts!!.setOnRefreshListener {
+        binding.refreshFacts.setOnRefreshListener {
             factViewModel.clearData()
             adapter.submitList(null)
             factViewModel.refreshItem()
@@ -80,7 +80,7 @@ class FactDetailsFragment : DaggerFragment() {
             if (it is Event.ConnectivityEvent)
                 handleConnectivityChange()
         })
-        binding.retryButton!!.setOnClickListener {
+        binding.retryButton.setOnClickListener {
             factViewModel.refreshItem()
         }
     }
@@ -90,12 +90,12 @@ class FactDetailsFragment : DaggerFragment() {
         adapter: FactsDetailAdapter
     ) {
         factViewModel.facts.observe(viewLifecycleOwner, Observer { result ->
-            if (binding.refreshFacts!!.isRefreshing) {
+            if (binding.refreshFacts.isRefreshing) {
                 binding.refreshFacts.isRefreshing = false
             }
             when (result.status) {
                 Result.Status.SUCCESS -> {
-                    binding.progressBar!!.visibility = View.GONE
+                    binding.progressBar.visibility = View.GONE
                     result.data?.let { it ->
                         Timber.e("${appSharedPreference.getStringData(TITTLE)!!} ")
                         factViewModel.setTittle(appSharedPreference.getStringData(TITTLE)!!)
@@ -103,16 +103,16 @@ class FactDetailsFragment : DaggerFragment() {
                     }
                 }
                 Result.Status.LOADING -> {
-                    binding.retryButton!!.visibility = View.GONE
-                    binding.progressBar!!.visibility = View.VISIBLE
+                    binding.retryButton.visibility = View.GONE
+                    binding.progressBar.visibility = View.VISIBLE
                 }
                 Result.Status.ERROR -> {
                     lifecycleScope.launch(Dispatchers.Main) {
-                        binding.progressBar!!.visibility = View.GONE
+                        binding.progressBar.visibility = View.GONE
                     }
                     //Hide Snackbar when loading from local database
                     if (adapter.itemCount == 0) {
-                        binding.retryButton!!.visibility = View.VISIBLE
+                        binding.retryButton.visibility = View.VISIBLE
                         val errorMessage =
                             if (!isConnected)
                                 NETWORK_ERROR

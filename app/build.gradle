@@ -21,7 +21,15 @@ android {
         dataBinding = true
     }
     buildTypes {
+        def API_URL = "API_END_POINT_URL"
+        def API_URL_TEST = "LOCAL_URL"
+        debug{
+            buildConfigField "String", API_URL, '"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/"'
+            buildConfigField "String", API_URL_TEST,  '"http://localhost:8080/"'
+        }
         release {
+            buildConfigField "String", API_URL, '"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/"'
+            buildConfigField "String", API_URL_TEST,  '"http://localhost:8080/"'
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
